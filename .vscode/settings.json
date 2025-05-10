@@ -1,0 +1,9 @@
+{
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.flake8Enabled": false,
+    "python.linting.mypyEnabled": false,
+    "python.linting.pylintArgs": [
+        "--disable=C0114,C0115,C0116" // Example: Disable specific pylint warnings
+    ]
+}

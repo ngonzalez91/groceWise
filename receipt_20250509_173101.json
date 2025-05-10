@@ -1,0 +1,67 @@
+{
+  "store": {
+    "name": "McDonald's",
+    "franchise": "Arcos Dorados Uruguay S.A.",
+    "address": "Av. Joaquin Suarez 4, Montevideo",
+    "branch": "POS",
+    "order_id": "140922",
+    "date": "26-04-2025",
+    "time": "22:99:52",
+    "currency": "UYU"
+  },
+  "items": [
+    {
+      "name": "Doble Cuarto de Libra",
+      "quantity": 2.0,
+      "unit_price": 665.0,
+      "total_price": 1330.0
+    },
+    {
+      "name": "Doble 1/4 Lib",
+      "quantity": 2.0,
+      "unit_price": 0.0,
+      "total_price": 0.0
+    },
+    {
+      "name": "C/ Coca SAG",
+      "quantity": 2.0,
+      "unit_price": 0.0,
+      "total_price": 0.0
+    },
+    {
+      "name": "C/Papas Grandes",
+      "quantity": 2.0,
+      "unit_price": 0.0,
+      "total_price": 0.0
+    },
+    {
+      "name": "Nug x 10",
+      "quantity": 1.0,
+      "unit_price": 369.0,
+      "total_price": 369.0
+    },
+    {
+      "name": "C/ BBQ",
+      "quantity": 9.0,
+      "unit_price": 0.0,
+      "total_price": 0.0
+    },
+    {
+      "name": "Delivery Propio-VTEX",
+      "quantity": 1.0,
+      "unit_price": 0.01,
+      "total_price": 0.01
+    }
+  ],
+  "totals": {
+    "net_amount": 1392.63,
+    "tax_rate": 22,
+    "tax_amount": 306.38,
+    "total": 1699.01
+  },
+  "additional": {
+    "security_code": "mN7",
+    "cae": "90252050032",
+    "valid_until": "30-03-2027"
+  }
+}
