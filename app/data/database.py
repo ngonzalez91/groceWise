@@ -9,23 +9,27 @@ def init_db():
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     name TEXT,
                     unit_price REAL,
-                    quantity REAL
+                    quantity REAL,
+                    store_name TEXT
                  )''')
     conn.commit()
     conn.close()
 
-def save_items_to_db(items):
+def save_items_to_db(items,store_name=None):
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     for item in items:
-        c.execute("INSERT INTO receipts (name, unit_price, quantity) VALUES (?, ?, ?)", (item['name'], item['unit_price'],item['quantity']))
+        unit_price = item.get("unit_price", 0.0)
+        if unit_price is None or unit_price < 1.00:
+            continue  # Skip very low-value items
+        c.execute("INSERT INTO receipts (name, unit_price, quantity, store_name) VALUES (?, ?, ?, ?)", (item['name'], item['unit_price'],item['quantity'],store_name))
     conn.commit()
     conn.close()
 
 def view_saved_items():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    c.execute("SELECT name, unit_price, quantity FROM receipts")
+    c.execute("SELECT name, unit_price, quantity, store_name FROM receipts")
     rows = c.fetchall()
     conn.close()
     return rows

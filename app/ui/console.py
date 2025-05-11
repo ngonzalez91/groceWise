@@ -13,10 +13,12 @@ def process_receipt(path):
 
     print("[INFO] Parsing structured receipt using AI...")
     structured = parse_structured_receipt(raw_text)
-
+    print('this is structured', structured)
+    store = structured.get("store", {})
+    store_name = store.get("name", "Unknown")
     if 'items' in structured:
         print("[INFO] Saving items to database...")
-        save_items_to_db(structured['items'])
+        save_items_to_db(structured['items'],store_name=store_name)
 
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     out_path = f"receipt_{ts}.json"
@@ -43,8 +45,8 @@ def main_menu():
         elif choice == "2":
             rows = view_saved_items()
             print("\n--- Saved Items in DB ---")
-            for name, unit_price, quantity in rows:
-                print(f"Name: {name} | Unit Price: {unit_price:.2f} | Quantity: {quantity:.2f}")
+            for name, unit_price, quantity, store_name in rows:
+                print(f"Name: {name} | Unit Price: {unit_price:.2f} | Quantity: {quantity:.2f} | Store Name: {store_name}")
         elif choice == "3":
             print("Goodbye!")
             break
