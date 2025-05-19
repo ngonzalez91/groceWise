@@ -13,3 +13,5 @@ Thumbs.db
 
 # Database files
 *.db
+# Project root JSON files
+/*.json
