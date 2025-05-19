@@ -10,3 +10,6 @@ venv/
 # Mac / Linux / Windows
 .DS_Store
 Thumbs.db
+
+# Database files
+*.db
