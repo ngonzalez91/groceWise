@@ -1,107 +1,69 @@
-# 🧾 Receipt Insights - Console OCR App
+# 🧾 GroceWise - Receipt Insights
 
-A Python console application that scans receipts (from images or PDFs), extracts structured data using Tesseract OCR and OpenAI, and gives you insights and suggestions to help you save money.
-
----
-
-## ⚙️ Before You Start
-
-### ✅ 1. Python 3.8+
-Install from: https://www.python.org/downloads/
-
-### ✅ 2. Tesseract OCR Engine
-Used for extracting text from receipt images or scanned PDFs.
-
-#### macOS:
-```bash
-brew install tesseract
-```
-
-#### Ubuntu/Debian:
-```bash
-sudo apt install tesseract-ocr
-```
-
-#### Windows:
-- Download from: https://github.com/tesseract-ocr/tesseract
-- Add the install directory (e.g., `C:\Program Files\Tesseract-OCR`) to your system `PATH`.
-
-### ✅ 3. Poppler
-Used to convert PDF pages into images for OCR.
-
-#### macOS:
-```bash
-brew install poppler
-```
-
-#### Ubuntu/Debian:
-```bash
-sudo apt install poppler-utils
-```
-
-#### Windows:
-- Download from: https://blog.alivate.com.au/poppler-windows/
-- Unzip and copy the path to the `/bin` folder.
-- Add that path to your **System Environment Variables → PATH**.
+GroceWise is a command line tool that scans receipt images or PDFs, extracts text with Tesseract OCR and OpenAI, and produces structured data that helps you track spending.
 
 ---
 
-## 📦 Python Dependencies
+## Table of Contents
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Output](#output)
+- [Project Structure](#project-structure)
+- [License](#license)
 
-Install required packages (preferably inside a virtual environment):
+## Requirements
+- **Python 3.8+**
+- **Tesseract OCR** – used to extract text from images or scanned PDFs
+- **Poppler** – converts PDF pages into images for OCR
 
+## Installation
+
+### Install System Packages
+- **macOS**
+  ```bash
+  brew install tesseract poppler
+  ```
+- **Ubuntu/Debian**
+  ```bash
+  sudo apt install tesseract-ocr poppler-utils
+  ```
+- **Windows**
+  1. [Download Tesseract](https://github.com/tesseract-ocr/tesseract) and add the installation directory to your `PATH`.
+  2. [Download Poppler](https://blog.alivate.com.au/poppler-windows/) and add the `bin` folder to your `PATH`.
+
+### Install Python Packages
+It is recommended to use a virtual environment.
 ```bash
 pip install -r requirements.txt
 ```
 
-Dependencies include:
-- `pytesseract`
-- `Pillow`
-- `pdf2image`
-- `openai`
-- `python-dotenv`
-
----
-
-## 🔐 OpenAI API Key
-
-1. Create a `.env` file in your project root:
+## Configuration
+Create a `.env` file in the project root containing your OpenAI API key:
 ```env
 OPENAI_API_KEY=your-real-api-key-here
 ```
+The application loads this automatically using `dotenv`.
 
-2. Ensure the following is in your Python code (already included):
-```python
-from dotenv import load_dotenv
-load_dotenv()
-```
-
----
-
-## 🚀 How to Use
-
-### Run the app:
+## Usage
+Run the console application:
 ```bash
 python main.py
 ```
+You will be presented with a menu:
+1. Scan a new receipt (image or PDF)
+2. Process all receipts in a folder
+3. View saved receipts
+4. Normalize item names
+5. Compare prices by store
+6. Exit
 
-### Console Menu:
-- `1` → Scan a new receipt (PDF or image)
-- `2` → View saved receipts (from SQLite)
-- `3` → Exit
+## Output
+- Each processed receipt is saved as `receipt_YYYYMMDD_HHMMSS.json`.
+- Items with valid data are stored in the SQLite database `bills.db`.
 
----
-
-## 📤 Output
-
-- Saves structured receipt as a `.json` file (e.g., `receipt_20250426_225952.json`)
-- JSON includes:
-  - Store info
-  - Item details
-  - Totals + taxes
-  - Additional metadata (security code, CAE, etc.)
-
-Example:
+Example JSON output:
 ```json
 {
   "store": {
@@ -119,22 +81,17 @@ Example:
 }
 ```
 
----
-
-## 📂 Project Structure
-
+## Project Structure
 ```
-receipt_insights/
-├── core/              # OCR and PDF handling
-├── data/              # SQLite database operations
-├── services/          # OpenAI parsing logic
-├── ui/                # Console interface
-├── main.py            # Entry point
-├── requirements.txt
+app/
+├── core/       # OCR and PDF handling
+├── data/       # Database operations
+├── services/   # OpenAI parsing logic
+├── ui/         # Console interface
+├── __init__.py
+main.py         # Entry point
+requirements.txt
 ```
 
----
-
-## 🛡️ License
-
-MIT — feel free to use, extend, and contribute!
+## License
+MIT — feel free to use, extend and contribute!
