@@ -14,6 +14,7 @@ def init_db():
     c.execute('''CREATE TABLE IF NOT EXISTS receipts (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     name TEXT,
+                    category_name TEXT,
                     unit_price REAL,
                     quantity REAL,
                     store_name TEXT
@@ -44,6 +45,7 @@ def process_receipt(path):
         items = structured.get("items", [])
     has_nulls = any(
         i.get("name") is None or
+        i.get("category_name") is None or
         i.get("quantity") is None or
         i.get("unit_price") is None or
         i.get("total_price") is None
@@ -68,7 +70,7 @@ def save_items_to_db(items,store_name=None):
         unit_price = item.get("unit_price", 0.0)
         if unit_price is None or unit_price < 1.00:
             continue  # Skip very low-value items
-        c.execute("INSERT INTO receipts (name, unit_price, quantity, store_name) VALUES (?, ?, ?, ?)", (item['name'], item['unit_price'],item['quantity'],store_name))
+        c.execute("INSERT INTO receipts (name, category_name, unit_price, quantity, store_name) VALUES (?, ?, ?, ?, ?)", (item['name'], item['category_name'], item['unit_price'],item['quantity'],store_name))
     conn.commit()
     conn.close()
 
@@ -91,7 +93,7 @@ def save_incomplete_receipt(structured):
 def view_saved_items():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    c.execute("SELECT name, unit_price, quantity, store_name FROM receipts")
+    c.execute("SELECT name, category_name, unit_price, quantity, store_name FROM receipts")
     rows = c.fetchall()
     conn.close()
     return rows

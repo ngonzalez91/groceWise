@@ -26,8 +26,8 @@ def main_menu():
         elif choice == "3":
             rows = view_saved_items()
             print("\n--- Saved Items in DB ---")
-            for name, unit_price, quantity, store_name in rows:
-                print(f"Name: {name} | Unit Price: {unit_price:.2f} | Quantity: {quantity:.2f} | Store Name: {store_name}")
+            for name, category_name, unit_price, quantity, store_name in rows:
+                print(f"Name: {name} | Category Name: {category_name} | Unit Price: {unit_price:.2f} | Quantity: {quantity:.2f} | Store Name: {store_name}")
         elif choice == "4":
             normalize_new_items()
             # Display the latest normalization mapping

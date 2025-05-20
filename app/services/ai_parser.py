@@ -22,13 +22,15 @@ store:
   name, franchise, address, branch, order_id, date, time, currency
 
 items:
-  name, quantity, unit_price, total_price
+  name, category_name, quantity, unit_price, total_price
 
 totals:
   net_amount, tax_rate, tax_amount, total
 
 additional:
   security_code, cae, valid_until
+
+category_name for an item will not appear in the scanned receipt. However, try guessing the category_name based on item_name. item_name is in Spanish, I expect the same for category_name.
 
 Only return a JSON object. Here's the OCR text:
 
